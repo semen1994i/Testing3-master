@@ -1,4 +1,5 @@
-dist: bionic
+os: linux
+dist: xenial
 
 language:
   - cpp
@@ -8,7 +9,7 @@ before_install:
 
 addons:
   sonarcloud:
-    organization: "bloody-azimus"
+    organization: "deadman23ru"
     token: $SONAR_TOKEN
 
 script:
@@ -18,7 +19,7 @@ script:
 
 after_success:
   - make clean
-  - coveralls --root . -E ".*external.*" -E ".*tests.*" -E ".*main.c"
+  - coveralls --root . -E ".*external.*" -E ".*tests.*"
   - build-wrapper-linux-x86-64 --out-dir bw-output make clean all
   - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
 
